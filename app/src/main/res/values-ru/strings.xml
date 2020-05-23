@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="город">ГОРОД</string>
+    <string name="Дата">дата обновления</string>
+    <string name="Иконка">Ик</string>
+    <string name="Температура">38,5 С</string>
+    <string name="Данные">данные</string>
+    <string name="МинТ">Мин 38,6</string>
+    <string name="МаксТ">Макс 34</string>
+</resources>

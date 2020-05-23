@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exclamation">Внимание!</string>
+    <string name="menu_home" >Мой город</string>
+    <string name="nav_header_title" >Погода;)</string>
+    <string name="press_button">Такого города нет</string>
+    <string name="network_error">Нет сети!</string>
+    <string name="button">ОК</string>
+    <string name="server_error">Ошибка соединения с сервером</string>
+    <string name="lost_connection">Сигнал потерян</string>
+    <string name="wifi_connected">wifi потерян</string>
+    <string name="gps">GPS</string>
+    <string name="update_the_weather">обновить погоду</string>
+    <string name="menu_history">История погоды</string>
+    <string name="home_second">Следующий экран</string>
+    <string name="change_city">Город</string>
+    <string name="action_settings">Настройки</string>
+</resources>

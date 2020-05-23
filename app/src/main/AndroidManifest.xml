@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.mkedonsky.myapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <application
+        android:name=".database.DatabaseApp"
+        android:allowBackup="true"
+        android:icon="@drawable/cloud"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <receiver
+            android:name="ru.mkedonsky.myapp.broadcast.NetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+        </receiver>
+        <receiver
+            android:name="ru.mkedonsky.myapp.broadcast.MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+        </receiver>
+
+        <activity
+            android:name="ru.mkedonsky.myapp.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
+                <action android:name="android.intent.action.ACTION_BATTERY_OKAY" />
+                <action android:name="android.intent.action.CONNECTIVITY_SERVICE" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="ru.mkedonsky.myapp.broadcast.PushNotificationsService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBgf9-i31UZUTB4vUuTiRDm9QwQtbEOZ_0"/>
+    </application>
+
+</manifest>
