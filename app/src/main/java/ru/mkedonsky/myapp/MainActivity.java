@@ -46,7 +46,7 @@ import static ru.mkedonsky.myapp.MyLocationListener.imHere;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 10;
-    private  int RC_SIGN_IN = 100 ;
+    private final int RC_SIGN_IN = 100 ;
     private GoogleSignInClient googleSignInClient;
     private static String locCity;
     public static String getLocCity() {
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private AppBarConfiguration mAppBarConfiguration;
-    private BroadcastReceiver myRecever = new MyReceiver();
-    private BroadcastReceiver networkChangeReceiver = new NetworkChangeReceiver();
+    private final BroadcastReceiver myReceiver = new MyReceiver();
+    private final BroadcastReceiver networkChangeReceiver = new NetworkChangeReceiver();
 
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         onLocationChanged();
         requestPermissions();
 
-        registerReceiver(myRecever, new IntentFilter(Intent.ACTION_BATTERY_LOW));
+        registerReceiver(myReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
         registerReceiver(networkChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         initNotificationChannel();
 
@@ -103,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onPause() {
         MyLocationListener.SetUpLocationListener(this);
         onLocationChanged();
-        requestPermissions();
-        super.onResume();
+        super.onPause();
+
+
     }
 
     @Override
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(GoogleSignInAccount account){
-        if (account== null || account.isExpired() ||  account.getIdToken()==null) {
+        if (account == null || account.isExpired() ||  account.getIdToken()==null) {
 
         }else{
             Toast.makeText(getApplicationContext(),account.getId(),Toast.LENGTH_SHORT).show();
@@ -133,11 +134,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -145,13 +142,9 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
             assert account != null;
             updateUI(account);
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(MainActivity.class.getSimpleName(), "signInResult:failed code=" + e.getStatusCode());
             updateUI(null);
         }
@@ -181,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
     public void onLocationChanged() {
 
         if (imHere == null) {
-            locCity = "London";
+            locCity = "Ufa";
             return;
         }
 
@@ -239,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     // Результат запроса Permission’а у пользователя:
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -249,8 +241,6 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults.length == 2 &&
                     (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1]
                             == PackageManager.PERMISSION_GRANTED)) {
-                // Все препоны пройдены и пермиссия дана
-                // Запросим координаты
                 onLocationChanged();
             }
         }

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 class LastCity {
     private String lastCity;
-    private File file;
+    private final File file;
 
     LastCity(FragmentActivity activity) {
         file = new File(activity.getFilesDir(), "lastCity.txt");

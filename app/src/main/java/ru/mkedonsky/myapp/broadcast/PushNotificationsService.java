@@ -1,13 +1,15 @@
 package ru.mkedonsky.myapp.broadcast;
-import android.annotation.SuppressLint;
+
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
 import java.util.Objects;
 
-@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 public class PushNotificationsService extends FirebaseMessagingService {
     private static final String TAG = "FireBase" ;
 

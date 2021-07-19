@@ -4,7 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OpenWeatherRepo {
     private static OpenWeatherRepo singleton = null;
-    private IOpenWeather API;
+    private final IOpenWeather API;
 
     private OpenWeatherRepo() {
         API = createAdapter();

@@ -1,5 +1,6 @@
 package ru.mkedonsky.myapp.ui.home;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -139,9 +141,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void updateWeatherData(final String city) {
-        Log.e("City","City--"+ city);
+        Log.e("City", "City--" + city);
         OpenWeatherRepo.getSingleton().getAPI().loadWeather(city + ",ru",
-                "762ee61f52313fbd10a4eb54ae4d4de2", "metric","ru")
+                "762ee61f52313fbd10a4eb54ae4d4de2", "metric", "ru")
                 .enqueue(new Callback<WeatherRequestRestModel>() {
                     @Override
                     public void onResponse(@NonNull Call<WeatherRequestRestModel> call,
@@ -182,9 +184,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        DatabaseHelper.addCityR(model.name,model.dt,model.main.temp,model.main.tempMax,
 //                model.main.tempMin,model.main.pressure);
         setPlaceName(model.name, model.sys.country);
-        setDetails(model.weather[0].description,model.main.feelsLike, model.main.humidity, model.main.pressure);
+        setDetails(model.weather[0].description, model.main.feelsLike, model.main.humidity, model.main.pressure);
         setCurrentTemp(model.main.temp);
-        setCurrentTempMinMax(model.main.tempMin,model.main.tempMax);
+        setCurrentTempMinMax(model.main.tempMin, model.main.tempMax);
         setUpdatedText(model.dt);
         setWeatherIcon(model.weather[0].id,
                 model.sys.sunrise * 1000,
@@ -199,7 +201,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 model.main.pressure,
                 "Cloudy"
         );
-        Toast toast=Toast. makeText(getContext(),"Database add success!",Toast. LENGTH_SHORT);
+        Toast toast = Toast.makeText(getContext(), "Database add success!", Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -208,9 +210,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         cityTextView.setText(cityText);
     }
 
-    private void setDetails(String description,float feelsLike, float humidity, float pressure) {
+    private void setDetails(String description, float feelsLike, float humidity, float pressure) {
         String detailsText = description.toUpperCase() + "\n"
-                +  "FeelsLike: " + String.format(Locale.getDefault(), "%.1f", feelsLike) + "\u2103"  + "\n"
+                + "FeelsLike: " + String.format(Locale.getDefault(), "%.1f", feelsLike) + "\u2103" + "\n"
                 + "Humidity: " + humidity + "%" + "\n"
                 + "Pressure: " + pressure + "hPa";
         detailsTextView.setText(detailsText);
@@ -221,10 +223,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         currentTemperatureTextView.setText(currentTextText);
     }
 
-    private void setCurrentTempMinMax (float tempMin,float tempMax){
-        String tempMinText = "Min: " + String.format(Locale.getDefault(),"%.0f",tempMin) +"\u2103   ";
+    private void setCurrentTempMinMax(float tempMin, float tempMax) {
+        String tempMinText = "Min: " + String.format(Locale.getDefault(), "%.0f", tempMin) + "\u2103   ";
         tempMinTextView.setText(tempMinText);
-        String tempMaxText ="Max: "  + String.format(Locale.getDefault(),"%.0f",tempMax) +"\u2103";
+        String tempMaxText = "Max: " + String.format(Locale.getDefault(), "%.0f", tempMax) + "\u2103";
         tempMaxTextView.setText(tempMaxText);
 
     }
@@ -301,7 +303,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         weatherIconTextView.setText(icon);
     }
-
 
 
     private void clickAlertDialog() {

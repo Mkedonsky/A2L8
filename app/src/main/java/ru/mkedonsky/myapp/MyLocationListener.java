@@ -30,9 +30,12 @@ public class MyLocationListener implements LocationListener {
 
         imHere = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-//        if (imHere == null) {
-//            locationManager.requestLocationUpdates();
-//        }
+        if (imHere == null) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    1000,
+                    0,
+                    locationListener);
+        }
 
     }
 

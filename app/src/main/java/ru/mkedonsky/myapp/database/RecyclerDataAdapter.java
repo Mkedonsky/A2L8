@@ -14,13 +14,11 @@ import java.util.List;
 import ru.mkedonsky.myapp.R;
 
 public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.ViewHolder> {
-    private String[] data;
-    private Context context;
-    private DatabaseSource databaseSource;
+    private final String[] data;
+    private final DatabaseSource databaseSource;
 
 
     public RecyclerDataAdapter(Context context, DatabaseSource databaseSource) {
-        this.context = context;
         this.databaseSource = databaseSource;
         data = databaseSource.getDataForRecycler();
     }
@@ -38,17 +36,6 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.listItemTextView.setText(data[position]);
-//        List<CityRequest> requests = databaseSource.getAllRequests();
-//        CityRequest request = requests.get(position);
-//        holder.listItemTextView.setText(request.city_name);
-//        holder.listItemTextView.setText(request.last_request);
-//        holder.listItemTextView.setText(String.valueOf(request.temp));
-//        holder.listItemTextView.setText(String.valueOf(request.max_temp));
-//        holder.listItemTextView.setText(String.valueOf(request.min_temp));
-//        holder.listItemTextView.setText(String.valueOf(request.pressure));
-//        holder.listItemTextView.setText(request.overcast);
-
-
     }
 
     @Override
